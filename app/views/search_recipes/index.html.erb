@@ -1,0 +1,24 @@
+<div class="mt-5">
+  <div class="input-group">
+    <%= form_tag root_path, method: :get, class: "input-group" do %>
+      <%= text_field_tag :query, current_query, placeholder: "Search for...", class: "form-control" %>
+      <span class="input-group-btn">
+        <input type="submit" value="Search" class="btn btn-secondary">
+      </span>
+    <% end %>
+  </div>
+
+  <% if @recipes.blank? %>
+    <h5 class="mt-5 center-block text-center">There are no recipes with the current query <%= current_query %></h5>
+  <% end %>
+
+  <table class="table table-striped mt-5">
+    <tbody>
+      <% @recipes.each do |recipe| %>
+        <tr>
+          <td><a href="<%= recipe['href'] %>"><%= CGI.unescapeHTML(recipe['title']).html_safe %></a></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
